@@ -55,7 +55,7 @@ export default class TodoAppDashboard extends Component {
 
       return (
         <tr key={index}>
-          <td><Status value={task.status} small={true} /></td>
+          <td><Status value={task.status} /></td>
           <td>{task.item}</td>
         </tr>
       );
@@ -69,7 +69,7 @@ export default class TodoAppDashboard extends Component {
               getLabel('Past Due', tasksMap.critical, "critical"),
               getLabel('Due Soon', tasksMap.warning, "warning"),
               getLabel('Done', tasksMap.ok, "ok")
-            ]} type="circle" units="Tasks" />
+            ]} type="circle" />
           </Tile>
           <Tile>
             <Header><h3>My Tasks:</h3></Header>

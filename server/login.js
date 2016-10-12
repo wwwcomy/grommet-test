@@ -12,7 +12,7 @@ export default {
 		var client = new Client();
 		var args = {
 			data: {
-				'return_uri': 'http://localhost:8000/login/authenticate',
+				'return_uri': 'http://localhost:9000/login/authenticate',
 				'support_error_callback': true
 			},
 			headers: this.jsonHeader
@@ -36,7 +36,7 @@ export default {
 		let url = constants.getAccessTokenUrl();
 		client.post(url, args, function(data, response) {
 			req.session.accessToken = data.token.id;
-			resp.redirect('http://localhost:8000/main');
+			resp.redirect('http://localhost:9000/main');
 		});
 	}
 }

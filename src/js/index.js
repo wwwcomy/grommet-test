@@ -1,33 +1,11 @@
 import '../scss/index.scss';
 
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import App from 'grommet/components/App';
+import {Router, browserHistory} from 'react-router';
+import routes from './routes';
 
 
-class Main extends Component {
-
-  constructor() {
-    super();
-    this.startLogin = this.startLogin.bind(this);
-    this.state = {
-      count: 0
-    };
-  }
-
-  startLogin() {
-    
-  }
-
-  render () {
-    return (
-      <App centered={false}>
-        <loginBtn />
-      </App>
-    );
-  }
-};
-
-let element = document.getElementById('btn');
-ReactDOM.render(React.createElement(Main), element);
-
+let element = document.getElementById('content');
+// ReactDOM.render(React.createElement(Main), element);
+ReactDOM.render(<Router history={browserHistory} routes={routes} />, element);
