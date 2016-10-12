@@ -3,6 +3,7 @@ import LoginBtn from './components/LoginBtn';
 import NotFound from './components/NotFound';
 import TodoAppDashboard from './components/TodoAppDashboard';
 import InnerMain from './components/InnerMain';
+import OrgList from './components/OrgList';
 
 export default {
   path: '/',
@@ -14,9 +15,12 @@ export default {
     path: 'main',
     component: InnerMain,
     indexRoute: {
-      component: TodoAppDashboard
+      component: OrgList
     },
     childRoutes: [{
+      path: 'orgList',
+      component: OrgList
+    }, {
       path: '*',
       component: TodoAppDashboard
     }]

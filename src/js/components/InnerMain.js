@@ -5,30 +5,39 @@ import Title from 'grommet/components/Title';
 import Sidebar from 'grommet/components/Sidebar';
 import Menu from 'grommet/components/Menu';
 import Anchor from 'grommet/components/Anchor';
+import Button from 'grommet/components/Button';
 import Split from 'grommet/components/Split';
+import CloseIcon from 'grommet/components/icons/base/Close';
 
 export default class InnerMain extends Component {
 
   constructor() {
     super();
+    this._onClose = this._onClose.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     document.body.classList.remove('loading');
+  }
+
+  _onClose() {
   }
 
   render () {
     return (
       <div>
-        <Header direction="row" justify="between"
-          pad={{horizontal: 'medium'}}>
-          <Title>IdM Admin</Title>
-        </Header>
+
 
         <Split flex="right">
           <Sidebar size="small" colorIndex="neutral-1">
-            <Header pad={{"horizontal": "medium"}}>
-              Menu
+            <Header justify="between" pad={{horizontal: 'medium'}}>
+              <Title onClick={this._onClose} a11yTitle="Close Menu" responsive={true}>
+                Menu
+              </Title>
+              <Menu responsive={true}>
+                <Button plain={true} a11yTitle="Close Menu"
+                  onClick={this._onClose} icon={<CloseIcon />} />
+              </Menu>
             </Header>
             <Menu primary={true}>
               <Anchor>
