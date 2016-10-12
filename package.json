@@ -6,7 +6,14 @@
   "repository": "",
   "license": "",
   "dependencies": {
+    "body-parser": "^1.15.2",
+    "compression": "^1.6.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "express-session": "^1.14.1",
     "grommet": "https://github.com/grommet/grommet/tarball/stable",
+    "morgan": "^1.7.0",
+    "node-rest-client": "^2.0.1",
     "react": "^15.0.2",
     "react-dom": "^15.0.2",
     "react-router": "^2.8.1"

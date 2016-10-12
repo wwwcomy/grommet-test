@@ -13,5 +13,8 @@ export default {
   mainScss: 'src/scss/index.scss',
   devServerPort: 9000,
   eslintOverride: path.resolve(__dirname, 'customEslintrc'),
-  scsslint: true
+  scsslint: true,
+  devServerProxy:{
+    '/login/*': 'http://localhost:8000'
+  }
 };

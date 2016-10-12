@@ -3,7 +3,6 @@ import '../scss/index.scss';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import App from 'grommet/components/App';
-import Button from 'grommet/components/Button';
 
 
 class Main extends Component {
@@ -17,18 +16,13 @@ class Main extends Component {
   }
 
   startLogin() {
-    var count = this.state.count;
-    count++;
-    this.setState({
-      count: count
-    });
-    alert(this.state.count);
+    
   }
 
   render () {
     return (
       <App centered={false}>
-        <Button label="Login" onClick= {this.startLogin} primary={true} />
+        <loginBtn />
       </App>
     );
   }
