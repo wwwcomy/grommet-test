@@ -11,5 +11,11 @@ export default {
 	},
 	getAccessTokenUrl: function() {
 		return this.idmBaseUrl + this.idmAccessTokenSubUrl;
+	},
+	getIdmBaseUrl: function() {
+		return this.idmBaseUrl;
+	},
+	getRestLoginUrl: function() {
+		return this.idmBaseUrl + "v2.0/tokens/";
 	}
 }

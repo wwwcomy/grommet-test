@@ -36,6 +36,8 @@ export default {
 		let url = constants.getAccessTokenUrl();
 		client.post(url, args, function(data, response) {
 			req.session.accessToken = data.token.id;
+			req.session.userName = data.user.username;
+			req.session.tenantName = data.token.tenant.name;
 			resp.redirect('http://localhost:9000/main');
 		});
 	}

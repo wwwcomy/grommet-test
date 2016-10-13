@@ -7,6 +7,7 @@ import path from 'path'
 import session from 'express-session'
 
 import login from './login'
+import OrganizationService from './services/OrganizationService'
 import constants from './constant'
 
 const PORT = process.env.PORT || 8000;
@@ -32,6 +33,10 @@ app.get('/login/doLogin', (req, resp) => {
 
 app.get('/login/authenticate', (req, resp) => {
 	login.getAndStoreAccessToken(req, resp);
+});
+
+app.get('/api/organizations', (req, resp) => {
+	OrganizationService.getOrgList(req,resp);
 });
 
 app.get('/*', (req, resp) => {

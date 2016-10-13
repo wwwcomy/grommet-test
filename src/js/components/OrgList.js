@@ -5,12 +5,13 @@ import Header from 'grommet/components/Header';
 import Title from 'grommet/components/Title';
 import Article from 'grommet/components/Article';
 import OrganizationIcon from 'grommet/components/icons/base/Organization';
+import { headers, buildQuery, processStatus } from 'grommet/utils/Rest';
 
 export default class OrgList extends Component {
 
   constructor () {
     super();
-    
+    this.state = {orgList:[]};
   }
 
   componentWillMount () {
@@ -18,15 +19,10 @@ export default class OrgList extends Component {
   }
 
   render () {
-    return (
-      <Article pad={{'horizontal' : 'large'}}>
-        <Header justify="between">
-            <Title>
-                Organization List
-            </Title>
-        </Header>
-        <List>
-          <ListItem justify="between">
+    let orgList = this.state.orgList;
+    let orgJsxArray = [];
+    orgJsxArray.push(<List>
+          <ListItem justify="between" key="Alan">
             <span>
               <OrganizationIcon size="large" />
               Alan
@@ -35,6 +31,26 @@ export default class OrgList extends Component {
               happy
             </span>
           </ListItem>
+        </List>);
+    for(org in orgList) {
+      orgJsxArray.push(
+        <ListItem justify="between" key={org.name}>
+          <span>
+            <OrganizationIcon size="large" />
+            org.displayName
+          </span>
+        </ListItem>
+      );
+    }
+    return (
+      <Article pad={{'horizontal' : 'large'}}>
+        <Header justify="between">
+            <Title>
+                Organization List
+            </Title>
+        </Header>
+        <List>
+          {orgJsxArray}
         </List>
       </Article>
     );
