@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import Header from 'grommet/components/Header';
 import Footer from 'grommet/components/Footer';
-import Title from 'grommet/components/Title';
-import Sidebar from 'grommet/components/Sidebar';
 import Menu from 'grommet/components/Menu';
-import Anchor from 'grommet/components/Anchor';
-import Button from 'grommet/components/Button';
-import Split from 'grommet/components/Split';
-import CloseIcon from 'grommet/components/icons/base/Close';
+import HPELogo from './HPELogo';
 
 export default class InnerMain extends Component {
 
@@ -26,38 +21,21 @@ export default class InnerMain extends Component {
   render () {
     return (
       <div>
+        <Header justify="between" size="large" direction="row" pad={{horizontal: 'large'}}>
+          <div>
+            <HPELogo size='small' />
+            Identity Management
+          </div>
+          <Menu direction="row" responsive={false}>
+            <a href="#" onClick={this._onClose}>Account</a>
+          </Menu>
+        </Header>
 
+        {this.props.children}
 
-        <Split flex="right">
-          <Sidebar size="small" colorIndex="neutral-1">
-            <Header justify="between" pad={{horizontal: 'medium'}}>
-              <Title onClick={this._onClose} a11yTitle="Close Menu" responsive={true}>
-                Menu
-              </Title>
-              <Menu responsive={true}>
-                <Button plain={true} a11yTitle="Close Menu"
-                  onClick={this._onClose} icon={<CloseIcon />} />
-              </Menu>
-            </Header>
-            <Menu primary={true}>
-              <Anchor>
-                SAML Configuration
-              </Anchor>
-              <Anchor>
-                LDAP Configuration
-              </Anchor>
-              <Anchor>
-                Groups
-              </Anchor>
-            </Menu>
-          </Sidebar>
-          {this.props.children}
-        </Split>
-        
-        <Footer primary={true} appCentered={true} direction="column"
-          align="center" pad="small" colorIndex="grey-1">
+        <Footer primary={true} direction="column" pad="small" >
           <p>
-            Build your ideas with <a href="http://grommet.io" target="_blank">Grommet</a>!
+            © Copyright 2016 Hewlett Packard Enterprise Development LP
           </p>
         </Footer>
       </div>

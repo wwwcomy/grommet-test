@@ -3,49 +3,40 @@ import List from 'grommet/components/List';
 import ListItem from 'grommet/components/ListItem';
 import Header from 'grommet/components/Header';
 import Title from 'grommet/components/Title';
+import Article from 'grommet/components/Article';
+import OrganizationIcon from 'grommet/components/icons/base/Organization';
 
 export default class OrgList extends Component {
 
   constructor () {
     super();
+    
+  }
+
+  componentWillMount () {
+
   }
 
   render () {
-
     return (
-	<div>
-	    <Header justify="between" pad={{'horizontal' : 'medium'}}>
+      <Article pad={{'horizontal' : 'large'}}>
+        <Header justify="between">
             <Title>
                 Organization List
             </Title>
         </Header>
-      <List>
-        <ListItem justify="between">
-          <span>
-            Alan
-          </span>
-          <span className="secondary">
-            happy
-          </span>
-        </ListItem>
-        <ListItem justify="between">
-          <span>
-            Chris
-          </span>
-          <span className="secondary">
-            cool
-          </span>
-        </ListItem>
-        <ListItem justify="between">
-          <span>
-            Eric
-          </span>
-          <span className="secondary">
-            odd
-          </span>
-        </ListItem>
-      </List>
-	</div>
+        <List>
+          <ListItem justify="between">
+            <span>
+              <OrganizationIcon size="large" />
+              Alan
+            </span>
+            <span className="secondary">
+              happy
+            </span>
+          </ListItem>
+        </List>
+      </Article>
     );
   }
 };
