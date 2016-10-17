@@ -15,6 +15,7 @@ export default {
   eslintOverride: path.resolve(__dirname, 'customEslintrc'),
   scsslint: true,
   devServerProxy:{
-    '/login/*': 'http://localhost:8000'
+    '/login/*': 'http://localhost:8000',
+    '/api/*': 'http://localhost:8000'
   }
 };

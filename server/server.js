@@ -25,10 +25,15 @@ app.use(session({
 app.use('/', express.static(path.join(__dirname, '/../dist')));
 
 app.get('/login/doLogin', (req, resp) => {
-	login.login(function(data, resp) {
+	console.log('Got a login request');
+	login.login().then((data) => {
 		var requestTokenResp = data;
+		console.log('Got request token from IdM');
+		console.log(constants.getLoginUrl() + '?tenant=Provider&token=' + encodeURIComponent(requestTokenResp.id));
 		resp.redirect(constants.getLoginUrl() + '?tenant=Provider&token=' + encodeURIComponent(requestTokenResp.id));
-	}, resp);
+	}, (e) => {
+		resp.redirect("/elsewhere");
+	});
 });
 
 app.get('/login/authenticate', (req, resp) => {
@@ -36,7 +41,7 @@ app.get('/login/authenticate', (req, resp) => {
 });
 
 app.get('/api/organizations', (req, resp) => {
-	OrganizationService.getOrgList(req,resp);
+	OrganizationService.getOrgList(req, resp);
 });
 
 app.get('/*', (req, resp) => {

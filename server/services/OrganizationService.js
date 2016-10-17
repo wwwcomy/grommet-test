@@ -1,6 +1,6 @@
 var Client = require('node-rest-client').Client;
 var session = require('express-session');
-import constants from '../constant'
+import constants from '../constant';
 
 export default {
 	jsonHeader: {
@@ -11,45 +11,46 @@ export default {
 	saveAccessToken: function(data) {
 		console.log('' + data);
 	},
-	getAccessToken: function(cb, that) {
-		var client = new Client();
-		var args = {
-			data: {
-				"passwordCredentials": {
-					"username": "admin",
-					"password": "cloud"
-				},
-				"tenantName": "Provider"
-			},
-			headers: this.jsonHeader
-		};
-		let url = constants.getRestLoginUrl();
-		client.post(url, args, function(data, response) {
-			console.log('cb is ' + cb)
-			cb.call(that, data);
-		});
-	},
 	getOrgList: function(req, resp) {
 		var client = new Client();
-		let jsonHeader = this.jsonHeader;
-		//jsonHeader['X-Auth-Token'] = req.session.accessToken;
-		if (jsonHeader['X-Auth-Token'] != null) {
-			console.log('123');
-			get();
+		this.jsonHeader['X-Auth-Token'] = req.session.accessToken;
+		if (this.jsonHeader['X-Auth-Token'] != null) {
+			var args = {
+				headers: this.jsonHeader
+			};
+			client.get("http://localhost:9090/idm-service/api/scim/organizations", args, function(orgData, response) {
+				resp.send(orgData);
+			});
 		} else {
-			console.log('234');
-			this.getAccessToken(this.geat, this);
+			this.getAccessToken().then((accessToken) => {
+				var client = new Client();
+				this.jsonHeader['X-Auth-Token'] = accessToken;
+				var args = {
+					headers: this.jsonHeader
+				};
+				client.get("http://localhost:9090/idm-service/api/scim/organizations", args, function(orgData, response) {
+					resp.send(orgData);
+				});
+			});
 		}
 	},
-	geat: function(data) {
-		var client = new Client();
-		console.log(data.token.id);
-		this.jsonHeader['X-Auth-Token'] = data.token.id;
-		var args = {
-			headers: this.jsonHeader
-		};
-		client.get("http://localhost:9090/idm-service/api/scim/organizations", args, function(data1, response) {
-			console.log(JSON.stringify(data1));
+	getAccessToken: function(cb, that) {
+		return new Promise((resolve, reject) => {
+			var client = new Client();
+			var args = {
+				data: {
+					"passwordCredentials": {
+						"username": "admin",
+						"password": "cloud"
+					},
+					"tenantName": "Provider"
+				},
+				headers: this.jsonHeader
+			};
+			let url = constants.getRestLoginUrl();
+			client.post(url, args, function(data, response) {
+				resolve(data.token.id);
+			});
 		});
 	}
 

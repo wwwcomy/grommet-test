@@ -8,18 +8,22 @@ export default {
 		"Content-Type": "application/json",
 		"Accept": "application/json"
 	},
-	login: function(cb, resp) {
-		var client = new Client();
-		var args = {
-			data: {
-				'return_uri': 'http://localhost:9000/login/authenticate',
-				'support_error_callback': true
-			},
-			headers: this.jsonHeader
-		};
-		let url = constants.getRequestTokenUrl();
-		client.post(url, args, function(data, response) {
-			cb(data, resp);
+	login: function() {
+		console.log('In Login.login()');
+		return new Promise((resolve, reject) => {
+			var client = new Client();
+			var args = {
+				data: {
+					'return_uri': 'http://localhost:9000/login/authenticate',
+					'support_error_callback': true
+				},
+				headers: this.jsonHeader
+			};
+			let url = constants.getRequestTokenUrl();
+			console.log('Requesting request token from IdM server');
+			client.post(url, args, function(data, response) {
+				resolve(data);
+			});
 		});
 	},
 	getAndStoreAccessToken: function(req, resp) {
