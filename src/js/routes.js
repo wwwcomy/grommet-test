@@ -4,6 +4,7 @@ import NotFound from './components/NotFound';
 import TodoAppDashboard from './components/TodoAppDashboard';
 import InnerMain from './components/InnerMain';
 import OrgList from './components/OrgList';
+import OrgAdd from './components/OrgAdd';
 
 export default {
   path: '/',
@@ -20,6 +21,9 @@ export default {
     childRoutes: [{
       path: 'orgList',
       component: OrgList
+    }, {
+      path: 'orgAdd',
+      component: OrgAdd
     }, {
       path: '*',
       component: TodoAppDashboard
