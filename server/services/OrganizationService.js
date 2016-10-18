@@ -28,7 +28,32 @@ export default {
 				var args = {
 					headers: this.jsonHeader
 				};
-				client.get("http://localhost:9090/idm-service/api/scim/organizations", args, function(orgData, response) {
+				client.post("http://localhost:9090/idm-service/api/scim/organizations", args, function(orgData, response) {
+					resp.send(orgData);
+				});
+			});
+		}
+	},
+	createOrg: function(req, resp) {
+		var client = new Client();
+		this.jsonHeader['X-Auth-Token'] = req.session.accessToken;
+		if (this.jsonHeader['X-Auth-Token'] != null) {
+			var args = {
+				data: req.body,
+				headers: this.jsonHeader
+			};
+			client.post("http://localhost:9090/idm-service/api/scim/organizations", args, function(orgData, response) {
+				resp.send(orgData);
+			});
+		} else {
+			this.getAccessToken().then((accessToken) => {
+				var client = new Client();
+				this.jsonHeader['X-Auth-Token'] = accessToken;
+				var args = {
+					data: req.body,
+					headers: this.jsonHeader
+				};
+				client.post("http://localhost:9090/idm-service/api/scim/organizations", args, function(orgData, response) {
 					resp.send(orgData);
 				});
 			});

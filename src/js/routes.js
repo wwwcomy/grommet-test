@@ -5,6 +5,7 @@ import TodoAppDashboard from './components/TodoAppDashboard';
 import InnerMain from './components/InnerMain';
 import OrgList from './components/OrgList';
 import OrgAdd from './components/OrgAdd';
+import OrgDetail from './components/OrgDetail';
 
 export default {
   path: '/',
@@ -24,6 +25,9 @@ export default {
     }, {
       path: 'orgAdd',
       component: OrgAdd
+    }, {
+      path: 'organizations',
+      component: OrgDetail
     }, {
       path: '*',
       component: TodoAppDashboard

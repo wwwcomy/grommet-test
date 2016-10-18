@@ -7,7 +7,6 @@ import Article from 'grommet/components/Article';
 import OrganizationIcon from 'grommet/components/icons/base/Organization';
 import Rest from 'grommet/utils/Rest';
 import Button from 'grommet/components/Button';
-import Box from 'grommet/components/Box';
 
 export default class OrgList extends Component {
 
@@ -19,8 +18,8 @@ export default class OrgList extends Component {
   componentWillMount () {
     Rest.get('/api/organizations').then((data)=>{
       var state = this.state;
+      console.log(data.body);
       this.setState({orgList: state.orgList.concat(data.body.organizations)});
-      console.log(data.body.organizations[0]);
     });
   }
 
@@ -33,19 +32,20 @@ export default class OrgList extends Component {
           <span>
             <OrganizationIcon size="large" />
             <span>
-            {orgItem.displayName}
+              {orgItem.displayName}
             </span>
           </span>
         </ListItem>
       );
     });
+
     return (
       <Article pad={{'horizontal' : 'large'}}>
         <Header justify="between">
             <Title>
                 Organization List
             </Title>
-            <Button label="Add Organization" primary={true} href="addOrg" />
+            <Button label="Add Organization" primary={true} href="/main/orgAdd" />
         </Header>
         <List>
           {orgJsxArray}

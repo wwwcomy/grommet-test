@@ -44,6 +44,10 @@ app.get('/api/organizations', (req, resp) => {
 	OrganizationService.getOrgList(req, resp);
 });
 
+app.post('/api/organizations', (req, resp) => {
+	OrganizationService.createOrg(req, resp);
+});
+
 app.get('/*', (req, resp) => {
 	console.log('Client visiting with token in session:' + req.session.accessToken);
 	resp.sendFile(path.resolve(path.join(__dirname, '/../dist/index.html')));

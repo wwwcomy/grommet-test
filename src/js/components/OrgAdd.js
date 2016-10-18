@@ -9,31 +9,60 @@ import Footer from 'grommet/components/Footer';
 import Title from 'grommet/components/Title';
 import Tiles from 'grommet/components/Tiles';
 import Tile from 'grommet/components/Tile';
+import Rest from 'grommet/utils/Rest';
 
 export default class OrgAdd extends Component {
 
-  onFormSubmit () {
-  	// Rest.post('/api/organizations', ).then((data)=>{
-   //    console.log(data);
-   //  });
+  constructor() {
+    super();
+    this.onNameChange = this.onNameChange.bind(this);
+    this.onFormClose = this.onFormClose.bind(this);
+    this.onDisplayNameChange = this.onDisplayNameChange.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.state = {
+      name: undefined,
+      displayName: undefined
+    };
   }
 
-  onFormClose () {
+  onFormSubmit(e) {
+    e.preventDefault();
+    if (this.state.name && this.state.displayName) {
+      Rest.post('/api/organizations', this.state).then((data)=>{
+        window.top.location.href='/main/orgList';
+      });
+    }
+  }
 
+  onNameChange(e) {
+    this.setState({
+      name: e.target.value
+    });
+  }
+
+  onDisplayNameChange(e) {
+    this.setState({
+      displayName: e.target.value
+    });
+  }
+
+  onFormClose(e) {
+    e.preventDefault();
+    window.top.location.href='/main/orgList';
   }
 
   render () {
-    return <Layer align="center" closer={true} onClose={this.onFormSubmit} >
+    return <Layer align="center" closer={true} onClose={this.onFormClose} >
         <Form>
         <Header>
           <Title>Add a Todo Item</Title>
         </Header>
         <FormFields>
           <FormField label="Organization Name">
-            <input type="text" />
+            <input type="text" onChange={this.onNameChange}/>
           </FormField>
           <FormField label="Organization ID">
-            <input type="text" />
+            <input type="text" onChange={this.onDisplayNameChange}/>
           </FormField>
           <Footer pad={{vertical: 'medium'}} >
           <Tiles flush={false}>
@@ -47,6 +76,6 @@ export default class OrgAdd extends Component {
           </Footer>
         </FormFields>
       </Form>
-      </Layer>
+      </Layer>;
   }
 }
