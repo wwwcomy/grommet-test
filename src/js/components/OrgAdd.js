@@ -10,6 +10,7 @@ import Title from 'grommet/components/Title';
 import Tiles from 'grommet/components/Tiles';
 import Tile from 'grommet/components/Tile';
 import Rest from 'grommet/utils/Rest';
+import { browserHistory } from 'react-router';
 
 export default class OrgAdd extends Component {
 
@@ -29,7 +30,7 @@ export default class OrgAdd extends Component {
     e.preventDefault();
     if (this.state.name && this.state.displayName) {
       Rest.post('/api/organizations', this.state).then((data)=>{
-        window.top.location.href='/main/orgList';
+        browserHistory.push('/main/orgList');
       });
     }
   }
@@ -48,7 +49,7 @@ export default class OrgAdd extends Component {
 
   onFormClose(e) {
     e.preventDefault();
-    window.top.location.href='/main/orgList';
+    browserHistory.push('/main/orgList');
   }
 
   render () {

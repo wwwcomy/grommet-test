@@ -15,11 +15,11 @@ export default class OrgDetail extends Component {
     this.onTabActive = this.onTabActive.bind(this);
   }
 
-  componentWillMount(){
+  componentWillMount() {
     console.log(this.props.params.orgName);
   }
 
-  onTabActive(index){
+  onTabActive(index) {
   }
 
   deleteOrg () {

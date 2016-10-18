@@ -7,12 +7,14 @@ import Article from 'grommet/components/Article';
 import OrganizationIcon from 'grommet/components/icons/base/Organization';
 import Rest from 'grommet/utils/Rest';
 import Button from 'grommet/components/Button';
+import { browserHistory } from 'react-router';
 
 export default class OrgList extends Component {
 
   constructor () {
     super();
     this.state = {orgList:[]};
+    this.addOrg = this.addOrg.bind(this);
   }
 
   componentWillMount () {
@@ -21,6 +23,11 @@ export default class OrgList extends Component {
       console.log(data.body);
       this.setState({orgList: state.orgList.concat(data.body.organizations)});
     });
+  }
+  
+  addOrg(e) {
+    e.preventDefault();
+    browserHistory.push('/main/orgAdd'); 
   }
 
   render () {
@@ -45,7 +52,7 @@ export default class OrgList extends Component {
             <Title>
                 Organization List
             </Title>
-            <Button label="Add Organization" primary={true} href="/main/orgAdd" />
+            <Button label="Add Organization" primary={true} onClick = {this.addOrg} />
         </Header>
         <List>
           {orgJsxArray}
