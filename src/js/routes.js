@@ -26,7 +26,7 @@ export default {
       path: 'orgAdd',
       component: OrgAdd
     }, {
-      path: 'organizations',
+      path: 'organizations/:orgName',
       component: OrgDetail
     }, {
       path: '*',

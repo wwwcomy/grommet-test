@@ -6,7 +6,21 @@ import Header from 'grommet/components/Header';
 import Tab from 'grommet/components/Tab';
 import Tabs from 'grommet/components/Tabs';
 import Title from 'grommet/components/Title';
+import OrgOverview from './OrgOverview';
+
 export default class OrgDetail extends Component {
+
+  constructor () {
+    super();
+    this.onTabActive = this.onTabActive.bind(this);
+  }
+
+  componentWillMount(){
+    console.log(this.props.params.orgName);
+  }
+
+  onTabActive(index){
+  }
 
   deleteOrg () {
 
@@ -14,23 +28,16 @@ export default class OrgDetail extends Component {
 
   render () {
     return (
-      <Article pad={{'horizontal' : 'large'}}>
+      <Article pad={{'horizontal' : 'large'}} >
         <Header justify="between">
             <Title>
                 Organization Name
             </Title>
             <Button label="Delete" primary={false} onClick={this.deleteOrg} />
         </Header>
-         <Tabs>
+         <Tabs onActive={this.onTabActive}>
           <Tab title="Overview">
-            <Box pad={{'horizontal':'large'}}>
-              <h3>
-                Overview
-              </h3>
-              <p>
-                Contents of the first tab. This one has a Form.
-              </p>
-            </Box>
+            <OrgOverview orgName={this.props.params.orgName} />
           </Tab>
           <Tab title="Languages">
             <Box pad={{'horizontal':'large'}}>

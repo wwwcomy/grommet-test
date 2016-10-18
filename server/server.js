@@ -40,13 +40,20 @@ app.get('/login/authenticate', (req, resp) => {
 	login.getAndStoreAccessToken(req, resp);
 });
 
-app.get('/api/organizations', (req, resp) => {
-	OrganizationService.getOrgList(req, resp);
+app.route('/api/organizations/:orgNameOrId').get((req, resp) => {
+	let orgNameOrId = req.params.orgNameOrId;
+	console.log("In get org detail:", orgNameOrId);
+	OrganizationService.getOrgByNameOrId(orgNameOrId, req, resp);
 });
 
-app.post('/api/organizations', (req, resp) => {
+app.route('/api/organizations').get((req, resp) => {
+	console.log("In get org list:");
+	OrganizationService.getOrgList(req, resp);
+}).post((req, resp) => {
+	console.log("In create org");
 	OrganizationService.createOrg(req, resp);
 });
+
 
 app.get('/*', (req, resp) => {
 	console.log('Client visiting with token in session:' + req.session.accessToken);

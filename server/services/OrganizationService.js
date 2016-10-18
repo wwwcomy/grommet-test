@@ -13,12 +13,13 @@ export default {
 	},
 	getOrgList: function(req, resp) {
 		var client = new Client();
-		this.jsonHeader['X-Auth-Token'] = req.session.accessToken;
+		//this.jsonHeader['X-Auth-Token'] = req.session.accessToken;
 		if (this.jsonHeader['X-Auth-Token'] != null) {
 			var args = {
 				headers: this.jsonHeader
 			};
 			client.get("http://localhost:9090/idm-service/api/scim/organizations", args, function(orgData, response) {
+				console.log('Got org list from IdM');
 				resp.send(orgData);
 			});
 		} else {
@@ -54,6 +55,32 @@ export default {
 					headers: this.jsonHeader
 				};
 				client.post("http://localhost:9090/idm-service/api/scim/organizations", args, function(orgData, response) {
+					console.log('Got org list from IdM');
+					resp.send(orgData);
+				});
+			});
+		}
+	},
+	getOrgByNameOrId: function(orgNameOrId, req, resp) {
+		var client = new Client();
+		// this.jsonHeader['X-Auth-Token'] = req.session.accessToken;
+		if (this.jsonHeader['X-Auth-Token'] != null) {
+			var args = {
+				headers: this.jsonHeader
+			};
+			client.get("http://localhost:9090/idm-service/api/scim/organizations/" + orgNameOrId, args, function(orgData, response) {
+				console.log('Got org detail from IdM');
+				resp.send(orgData);
+			});
+		} else {
+			this.getAccessToken().then((accessToken) => {
+				var client = new Client();
+				this.jsonHeader['X-Auth-Token'] = accessToken;
+				var args = {
+					headers: this.jsonHeader
+				};
+				client.get("http://localhost:9090/idm-service/api/scim/organizations/" + orgNameOrId, args, function(orgData, response) {
+					console.log('Got org detail from IdM');
 					resp.send(orgData);
 				});
 			});
