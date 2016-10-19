@@ -15,12 +15,12 @@ export default class OrgList extends Component {
     super();
     this.state = {orgList:[]};
     this.addOrg = this.addOrg.bind(this);
+    this.selectOrg = this.selectOrg.bind(this);
   }
 
   componentWillMount () {
     Rest.get('/api/organizations').then((data)=>{
       var state = this.state;
-      console.log(data.body);
       this.setState({orgList: state.orgList.concat(data.body.organizations)});
     });
   }
@@ -28,6 +28,10 @@ export default class OrgList extends Component {
   addOrg(e) {
     e.preventDefault();
     browserHistory.push('/main/orgAdd'); 
+  }
+
+  selectOrg(index) {
+    browserHistory.push('/main/organizations/'+this.state.orgList[index].name); 
   }
 
   render () {
@@ -54,7 +58,7 @@ export default class OrgList extends Component {
             </Title>
             <Button label="Add Organization" primary={true} onClick = {this.addOrg} />
         </Header>
-        <List>
+        <List onSelect={this.selectOrg} selectable={true} ref="list">
           {orgJsxArray}
         </List>
       </Article>

@@ -1,18 +1,26 @@
 import React, { Component } from 'react';
-import Header from 'grommet/components/Header';
+import Anchor from 'grommet/components/Anchor';
 import Footer from 'grommet/components/Footer';
+import Header from 'grommet/components/Header';
 import Menu from 'grommet/components/Menu';
 import HPELogo from './HPELogo';
+import { browserHistory } from 'react-router';
 
 export default class InnerMain extends Component {
 
   constructor() {
     super();
     this._onClose = this._onClose.bind(this);
+    this.toMainPage = this.toMainPage.bind(this);
   }
 
   componentDidMount() {
     document.body.classList.remove('loading');
+  }
+
+  toMainPage(e) {
+    e.preventDefault();
+    browserHistory.push('/main');
   }
 
   _onClose() {
@@ -23,7 +31,7 @@ export default class InnerMain extends Component {
       <div>
         <Header justify="between" size="large" direction="row" pad={{horizontal: 'large'}}>
           <div>
-            <HPELogo size='small' />
+            <Anchor onClick={this.toMainPage} icon={<HPELogo size='small' />} />
             Identity Management
           </div>
           <Menu direction="row" responsive={false}>
