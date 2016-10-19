@@ -20,6 +20,7 @@ export default {
 			};
 			client.get("http://localhost:9090/idm-service/api/scim/organizations", args, function(orgData, response) {
 				console.log('Got org list from IdM');
+				console.log(orgData);
 				resp.send(orgData);
 			});
 		} else {

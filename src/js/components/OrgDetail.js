@@ -7,12 +7,19 @@ import Tab from 'grommet/components/Tab';
 import Tabs from 'grommet/components/Tabs';
 import Title from 'grommet/components/Title';
 import OrgOverview from './OrgOverview';
+import BreadCrumbNav from './BreadCrumbNav';
 
 export default class OrgDetail extends Component {
 
   constructor () {
     super();
     this.onTabActive = this.onTabActive.bind(this);
+    this.crumbs=[{
+      key : 'Organization List',
+      href : '/main/orgList'
+    }, {
+      key : 'Organization Detail'
+    }]
   }
 
   componentWillMount() {
@@ -28,6 +35,8 @@ export default class OrgDetail extends Component {
 
   render () {
     return (
+      <div>
+      <BreadCrumbNav crumbs = {this.crumbs}/>
       <Article pad={{'horizontal' : 'large'}} >
         <Header justify="between">
             <Title>
@@ -99,6 +108,7 @@ export default class OrgDetail extends Component {
           </Tab>
         </Tabs>
       </Article>
+      </div>
     );
   }
 }

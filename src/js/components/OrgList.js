@@ -8,11 +8,15 @@ import OrganizationIcon from 'grommet/components/icons/base/Organization';
 import Rest from 'grommet/utils/Rest';
 import Button from 'grommet/components/Button';
 import { browserHistory } from 'react-router';
+import BreadCrumbNav from './BreadCrumbNav';
 
 export default class OrgList extends Component {
 
   constructor () {
     super();
+    this.crumbs=[{
+      key : 'Organization List'
+    }]
     this.state = {orgList:[]};
     this.addOrg = this.addOrg.bind(this);
     this.selectOrg = this.selectOrg.bind(this);
@@ -51,6 +55,8 @@ export default class OrgList extends Component {
     });
 
     return (
+      <div>
+      <BreadCrumbNav crumbs = {this.crumbs}/>
       <Article pad={{'horizontal' : 'large'}}>
         <Header justify="between">
             <Title>
@@ -62,6 +68,7 @@ export default class OrgList extends Component {
           {orgJsxArray}
         </List>
       </Article>
+      </div>
     );
   }
 };
