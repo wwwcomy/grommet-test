@@ -29,7 +29,6 @@ app.get('/login/doLogin', (req, resp) => {
 	login.login().then((data) => {
 		var requestTokenResp = data;
 		console.log('Got request token from IdM');
-		console.log(constants.getLoginUrl() + '?tenant=Provider&token=' + encodeURIComponent(requestTokenResp.id));
 		resp.redirect(constants.getLoginUrl() + '?tenant=Provider&token=' + encodeURIComponent(requestTokenResp.id));
 	}, (e) => {
 		resp.redirect("/elsewhere");

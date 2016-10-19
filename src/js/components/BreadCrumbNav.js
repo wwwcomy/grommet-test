@@ -33,8 +33,10 @@ export default class BreadCrumbNav extends Component {
            }
       anchors.push(<Tile key={crumb.key + '_slash'}>/</Tile>);
     });
-    return (<Tiles direction="row" flush={false}>
+    return (<div><Tiles direction="row" flush={false} pad={{vertical:'none'}}>
     {anchors.slice(0,-1)}
-    </Tiles>);
+    </Tiles>
+    <hr/ >
+    </div>);
   }
 }

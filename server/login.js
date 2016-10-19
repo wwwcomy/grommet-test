@@ -28,8 +28,6 @@ export default {
 	},
 	getAndStoreAccessToken: function(req, resp) {
 		var requestTokenId = decodeURIComponent(req.query.token);
-		console.log(requestTokenId);
-
 		var client = new Client();
 		var args = {
 			data: {
@@ -42,6 +40,7 @@ export default {
 			req.session.accessToken = data.token.id;
 			req.session.userName = data.user.username;
 			req.session.tenantName = data.token.tenant.name;
+			console.log('new token in session:'+req.session.accessToken);
 			resp.redirect('http://localhost:9000/main');
 		});
 	}

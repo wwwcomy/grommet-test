@@ -8,9 +8,6 @@ export default {
 		"Content-Type": "application/json",
 		"Accept": "application/json"
 	},
-	saveAccessToken: function(data) {
-		console.log('' + data);
-	},
 	getOrgList: function(req, resp) {
 		var client = new Client();
 		//this.jsonHeader['X-Auth-Token'] = req.session.accessToken;
