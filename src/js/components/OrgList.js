@@ -16,7 +16,7 @@ export default class OrgList extends Component {
     super();
     this.crumbs=[{
       key : 'Organization List'
-    }]
+    }];
     this.state = {orgList:[]};
     this.addOrg = this.addOrg.bind(this);
     this.selectOrg = this.selectOrg.bind(this);

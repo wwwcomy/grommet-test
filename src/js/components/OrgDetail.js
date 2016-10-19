@@ -19,7 +19,7 @@ export default class OrgDetail extends Component {
       href : '/main/orgList'
     }, {
       key : 'Organization Detail'
-    }]
+    }];
   }
 
   componentWillMount() {

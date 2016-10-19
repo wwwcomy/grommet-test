@@ -15,7 +15,7 @@ export default {
 			var args = {
 				headers: this.jsonHeader
 			};
-			client.get("http://localhost:9090/idm-service/api/scim/organizations", args, function(orgData, response) {
+			client.get(constants.idmBaseUrl + "api/scim/organizations", args, function(orgData, response) {
 				console.log('Got org list from IdM');
 				console.log(orgData);
 				resp.send(orgData);
@@ -27,7 +27,7 @@ export default {
 				var args = {
 					headers: this.jsonHeader
 				};
-				client.post("http://localhost:9090/idm-service/api/scim/organizations", args, function(orgData, response) {
+				client.post(constants.idmBaseUrl + "api/scim/organizations", args, function(orgData, response) {
 					resp.send(orgData);
 				});
 			});
@@ -41,7 +41,7 @@ export default {
 				data: req.body,
 				headers: this.jsonHeader
 			};
-			client.post("http://localhost:9090/idm-service/api/scim/organizations", args, function(orgData, response) {
+			client.post(constants.idmBaseUrl + "api/scim/organizations", args, function(orgData, response) {
 				resp.send(orgData);
 			});
 		} else {
@@ -52,7 +52,7 @@ export default {
 					data: req.body,
 					headers: this.jsonHeader
 				};
-				client.post("http://localhost:9090/idm-service/api/scim/organizations", args, function(orgData, response) {
+				client.post(constants.idmBaseUrl + "api/scim/organizations", args, function(orgData, response) {
 					console.log('Got org list from IdM');
 					resp.send(orgData);
 				});
@@ -66,7 +66,7 @@ export default {
 			var args = {
 				headers: this.jsonHeader
 			};
-			client.get("http://localhost:9090/idm-service/api/scim/organizations/" + orgNameOrId, args, function(orgData, response) {
+			client.get(constants.idmBaseUrl + "api/scim/organizations/" + orgNameOrId, args, function(orgData, response) {
 				console.log('Got org detail from IdM');
 				resp.send(orgData);
 			});
@@ -77,7 +77,7 @@ export default {
 				var args = {
 					headers: this.jsonHeader
 				};
-				client.get("http://localhost:9090/idm-service/api/scim/organizations/" + orgNameOrId, args, function(orgData, response) {
+				client.get(constants.idmBaseUrl + "api/scim/organizations/" + orgNameOrId, args, function(orgData, response) {
 					console.log('Got org detail from IdM');
 					resp.send(orgData);
 				});

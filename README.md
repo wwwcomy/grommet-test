@@ -17,8 +17,8 @@ To run this application, execute the following commands:
     $ gulp dev
     ```
 
-  3. Create the app distribution to be used by the back-end server
+  3. Start the back-end server
 
     ```
-    $ gulp dist
+    $ node server/app
     ```

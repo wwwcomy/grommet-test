@@ -6,7 +6,7 @@ import { browserHistory } from 'react-router';
 
 export default class BreadCrumbNav extends Component {
   constructor() {
-  	super();
+    super();
     this.onCrumbClick = this.onCrumbClick.bind(this);
   }
 
@@ -18,19 +18,19 @@ export default class BreadCrumbNav extends Component {
     let crumbs = this.props.crumbs;
     let anchors = [];
     crumbs.map((crumb) => {
-          if(crumb.href){
-            anchors.push(
+      if(crumb.href) {
+        anchors.push(
               <Tile key={crumb.key}>
                   <Anchor onClick={this.onCrumbClick.bind(this, crumb.href)} label={crumb.key}  />
               </Tile>
             );
-           } else {
-           	anchors.push(
+      } else {
+        anchors.push(
                 <Tile key={crumb.key}>
                      {crumb.key}
                	</Tile>
                );
-           }
+      }
       anchors.push(<Tile key={crumb.key + '_slash'}>/</Tile>);
     });
     return (<div><Tiles direction="row" flush={false} pad={{vertical:'none'}}>
