@@ -9,7 +9,6 @@ export default {
 		"Accept": "application/json"
 	},
 	login: function() {
-		console.log('In Login.login()');
 		return new Promise((resolve, reject) => {
 			var client = new Client();
 			var args = {
@@ -27,6 +26,7 @@ export default {
 		});
 	},
 	getAndStoreAccessToken: function(req, resp) {
+		console.log('Login successfully via IdM, exchanging for the Access Token.');
 		var requestTokenId = decodeURIComponent(req.query.token);
 		var client = new Client();
 		var args = {
@@ -40,7 +40,7 @@ export default {
 			req.session.accessToken = data.token.id;
 			req.session.userName = data.user.username;
 			req.session.tenantName = data.token.tenant.name;
-			console.log('new token in session:'+req.session.accessToken);
+			console.log('Got access token and save it in session:'+req.session.accessToken);
 			resp.redirect('http://localhost:9000/main');
 		});
 	}
