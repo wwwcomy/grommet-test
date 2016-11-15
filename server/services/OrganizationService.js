@@ -10,7 +10,7 @@ export default {
 	},
 	getOrgList: function(req, resp) {
 		var client = new Client();
-		//this.jsonHeader['X-Auth-Token'] = req.session.accessToken;
+		this.jsonHeader['X-Auth-Token'] = req.session.accessToken;
 		if (this.jsonHeader['X-Auth-Token'] != null) {
 			var args = {
 				headers: this.jsonHeader
